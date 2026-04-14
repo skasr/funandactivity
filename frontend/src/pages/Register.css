@@ -1,0 +1,59 @@
+.register-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 80vh;
+    background-color: #f7f7f7;
+}
+
+.register-box {
+    background-color: white;
+    padding: 40px;
+    border-radius: 12px;
+    width: 100%;
+    max-width: 400px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.register-titre {
+    margin-bottom: 24px;
+    text-align: center;
+}
+
+.register-champ {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 16px;
+    gap: 6px;
+}
+
+.register-input {
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    font-size: 15px;
+}
+
+.register-btn {
+    width: 100%;
+    padding: 12px;
+    background-color: #ff385c;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 8px;
+}
+
+.register-erreur {
+    color: red;
+    margin-bottom: 12px;
+    text-align: center;
+}
+
+.register-lien {
+    text-align: center;
+    margin-top: 16px;
+    font-size: 14px;
+}
