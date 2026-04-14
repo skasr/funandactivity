@@ -8,6 +8,7 @@ import Register from "./pages/Register"
 import Detail from "./pages/Detail"
 import Dashboard from "./pages/Dashboard"
 import NewExperience from "./pages/NewExperience"
+import Chatbot from "./components/Chatbot"
 
 function App() {
     return (
@@ -30,6 +31,7 @@ function App() {
                         </ProtectedRoute>
                     } />
                 </Routes>
+                <Chatbot />
             </BrowserRouter>
         </AuthProvider>
     )

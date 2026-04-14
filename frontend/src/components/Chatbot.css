@@ -1,0 +1,140 @@
+.chatbot-wrapper {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    z-index: 999;
+}
+
+.chatbot-bulle {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background-color: #ff385c;
+    color: white;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+.chatbot-box {
+    position: absolute;
+    bottom: 70px;
+    right: 0;
+    width: 320px;
+    background-color: white;
+    border-radius: 16px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+    overflow: hidden;
+}
+
+.chatbot-header {
+    background-color: #ff385c;
+    color: white;
+    padding: 14px 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.chatbot-close {
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.chatbot-messages {
+    padding: 16px;
+    max-height: 380px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.msg-bot {
+    background-color: #f1f1f1;
+    padding: 10px 12px;
+    border-radius: 12px 12px 12px 0;
+    font-size: 13px;
+    max-width: 85%;
+    align-self: flex-start;
+}
+
+.msg-user {
+    background-color: #ff385c;
+    color: white;
+    padding: 10px 12px;
+    border-radius: 12px 12px 0 12px;
+    font-size: 13px;
+    max-width: 85%;
+    align-self: flex-end;
+}
+
+.chatbot-options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 4px;
+}
+
+.chatbot-option {
+    padding: 6px 12px;
+    border: 1px solid #ff385c;
+    border-radius: 20px;
+    background-color: white;
+    color: #ff385c;
+    cursor: pointer;
+    font-size: 12px;
+}
+
+.chatbot-option:hover {
+    background-color: #ff385c;
+    color: white;
+}
+
+.chatbot-resultats {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 4px;
+}
+
+.chatbot-carte {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.chatbot-carte:hover {
+    border-color: #ff385c;
+}
+
+.chatbot-carte-titre {
+    font-weight: bold;
+    font-size: 13px;
+    margin: 0 0 4px;
+}
+
+.chatbot-carte-info {
+    font-size: 12px;
+    color: #666;
+    margin: 0;
+}
+
+.chatbot-recommencer {
+    width: 100%;
+    padding: 10px;
+    background-color: #ff385c;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 13px;
+    margin-top: 4px;
+}
