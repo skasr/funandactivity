@@ -41,6 +41,9 @@ function Dashboard() {
     }
 
     const supprimerExperience = async (id) => {
+        const confirme = window.confirm("Êtes-vous sûr de vouloir supprimer cette expérience ? Cette action est irréversible.")
+        if (!confirme) return
+
         try {
             await axios.delete("http://localhost:3000/api/experiences/" + id, {
                 headers: { authorization: token }
@@ -87,6 +90,7 @@ function Dashboard() {
                                     </div>
                                     <div className="dash-actions">
                                         <button onClick={() => navigate("/experience/" + exp.id)} className="dash-btn-voir">Voir</button>
+                                        <button onClick={() => navigate("/modifier-experience/" + exp.id)} className="dash-btn-modifier">Modifier</button>
                                         <button onClick={() => supprimerExperience(exp.id)} className="dash-btn-supp">Supprimer</button>
                                     </div>
                                 </div>
@@ -105,7 +109,12 @@ function Dashboard() {
                                 <div key={resa.id} className="dash-item">
                                     <div>
                                         <p className="dash-item-titre">{resa.titre}</p>
-                                        <p className="dash-item-sub">Le {resa.date_resa} · {resa.nb_personnes} personne(s) · {resa.statut}</p>
+                                        <p className="dash-item-sub">
+                                            Le {resa.date_resa} · {resa.nb_personnes} personne(s) &nbsp;
+                                            <span className={"dash-statut " + (resa.statut === "confirmee" ? "dash-statut-confirmee" : "dash-statut-annulee")}>
+                                                {resa.statut}
+                                            </span>
+                                        </p>
                                     </div>
                                     {resa.statut === "confirmee" && (
                                         <button onClick={() => annulerReservation(resa.id)} className="dash-btn-supp">Annuler</button>

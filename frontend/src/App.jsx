@@ -8,6 +8,8 @@ import Register from "./pages/Register"
 import Detail from "./pages/Detail"
 import Dashboard from "./pages/Dashboard"
 import NewExperience from "./pages/NewExperience"
+import EditExperience from "./pages/EditExperience"
+import NotFound from "./pages/NotFound"
 import Chatbot from "./components/Chatbot"
 
 function App() {
@@ -30,6 +32,12 @@ function App() {
                             <NewExperience />
                         </ProtectedRoute>
                     } />
+                    <Route path="/modifier-experience/:id" element={
+                        <ProtectedRoute>
+                            <EditExperience />
+                        </ProtectedRoute>
+                    } />
+                    <Route path="*" element={<NotFound />} />
                 </Routes>
                 <Chatbot />
             </BrowserRouter>

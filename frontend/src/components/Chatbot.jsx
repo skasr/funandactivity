@@ -3,11 +3,10 @@ import axios from "axios"
 import "./Chatbot.css"
 
 const questions = [
-    { id: "categorie", texte: "Bonjour ! Quel type d'activité vous intéresse ?", options: ["Cuisine", "Sport", "Art", "Nature", "Musique", "Bien-être"] },
+    { id: "categorie", texte: "Bonjour ! Quel type d'activité vous intéresse ?", options: ["Bateau", "Randonnée", "Cuisine", "Vélo", "Pêche", "Surf", "Escalade", "Kayak"] },
     { id: "budget", texte: "Quel est votre budget par personne ?", options: ["Moins de 20€", "20€ - 50€", "Plus de 50€"] },
     { id: "lieu", texte: "Vous êtes plutôt où ?", options: ["Paris", "Lyon", "Marseille", "Bordeaux", "Autre"] }
 ]
-
 function Chatbot() {
     const [ouvert, setOuvert] = useState(false)
     const [etape, setEtape] = useState(0)

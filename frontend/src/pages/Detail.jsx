@@ -15,11 +15,50 @@ function Detail() {
     const [message, setMessage] = useState("")
     const [erreur, setErreur] = useState("")
 
+    const [avis, setAvis] = useState([])
+    const [noteChoisie, setNoteChoisie] = useState(0)
+    const [noteHover, setNoteHover] = useState(0)
+    const [commentaire, setCommentaire] = useState("")
+    const [avisErreur, setAvisErreur] = useState("")
+    const [avisMessage, setAvisMessage] = useState("")
+
     useEffect(() => {
         axios.get("http://localhost:3000/api/experiences/" + id)
             .then(res => setExperience(res.data))
             .catch(() => navigate("/"))
+        fetchAvis()
     }, [id])
+
+    const fetchAvis = () => {
+        axios.get("http://localhost:3000/api/experiences/" + id + "/avis")
+            .then(res => setAvis(res.data))
+            .catch(() => {})
+    }
+
+    const handleAvis = async (e) => {
+        e.preventDefault()
+        setAvisErreur("")
+        setAvisMessage("")
+
+        if (noteChoisie === 0) {
+            setAvisErreur("Veuillez choisir une note")
+            return
+        }
+
+        try {
+            await axios.post(
+                "http://localhost:3000/api/experiences/" + id + "/avis",
+                { note: noteChoisie, commentaire },
+                { headers: { authorization: token } }
+            )
+            setAvisMessage("Avis publié !")
+            setNoteChoisie(0)
+            setCommentaire("")
+            fetchAvis()
+        } catch (err) {
+            setAvisErreur(err.response?.data?.message || "Erreur lors de l'envoi")
+        }
+    }
 
     const handleReservation = async (e) => {
         e.preventDefault()
@@ -58,7 +97,7 @@ function Detail() {
                 </div>
 
                 <div className="detail-resa-box">
-                    <p className="detail-prix">{experience.prix} € / personne</p>
+                    <p className="detail-prix">{experience.prix} € <span>/ personne</span></p>
                     {user ? (
                         user.role === "visiteur" ? (
                             <form onSubmit={handleReservation}>
@@ -96,6 +135,56 @@ function Detail() {
                         </button>
                     )}
                 </div>
+            </div>
+            <div className="detail-avis">
+                <h2 className="detail-avis-titre">Avis</h2>
+
+                {user && user.role === "visiteur" && (
+                    <form className="detail-avis-form" onSubmit={handleAvis}>
+                        <p className="detail-avis-label">Votre note</p>
+                        <div className="detail-etoiles">
+                            {[1, 2, 3, 4, 5].map(n => (
+                                <span
+                                    key={n}
+                                    className={"etoile" + (n <= (noteHover || noteChoisie) ? " etoile-active" : "")}
+                                    onClick={() => setNoteChoisie(n)}
+                                    onMouseEnter={() => setNoteHover(n)}
+                                    onMouseLeave={() => setNoteHover(0)}
+                                >
+                                    ★
+                                </span>
+                            ))}
+                        </div>
+                        <textarea
+                            className="detail-avis-textarea"
+                            placeholder="Votre commentaire (facultatif)"
+                            value={commentaire}
+                            onChange={(e) => setCommentaire(e.target.value)}
+                            rows={3}
+                        />
+                        {avisErreur && <p className="detail-erreur">{avisErreur}</p>}
+                        {avisMessage && <p className="detail-success">{avisMessage}</p>}
+                        <button type="submit" className="detail-avis-btn">Publier l'avis</button>
+                    </form>
+                )}
+
+                {avis.length === 0 ? (
+                    <p className="detail-avis-vide">Aucun avis pour le moment</p>
+                ) : (
+                    <div className="detail-avis-liste">
+                        {avis.map(a => (
+                            <div key={a.id} className="detail-avis-item">
+                                <div className="detail-avis-header">
+                                    <span className="detail-avis-auteur">{a.auteur}</span>
+                                    <span className="detail-avis-note">
+                                        {"★".repeat(a.note)}{"☆".repeat(5 - a.note)}
+                                    </span>
+                                </div>
+                                {a.commentaire && <p className="detail-avis-commentaire">{a.commentaire}</p>}
+                            </div>
+                        ))}
+                    </div>
+                )}
             </div>
         </div>
     )

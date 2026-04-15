@@ -6,9 +6,10 @@ import "./Home.css"
 function Home() {
     const [experiences, setExperiences] = useState([])
     const [categorie, setCategorie] = useState("")
+    const [search, setSearch] = useState("")
     const [loading, setLoading] = useState(true)
 
-    const categories = ["Cuisine", "Sport", "Art", "Nature", "Musique", "Bien-être"]
+    const categories = ["Bateau", "Randonnée", "Cuisine", "Vélo", "Pêche", "Surf", "Escalade", "Kayak"]
 
     useEffect(() => {
         fetchExperiences()
@@ -16,9 +17,11 @@ function Home() {
 
     const fetchExperiences = async () => {
         try {
-            const url = categorie
-                ? "http://localhost:3000/api/experiences?categorie=" + categorie
-                : "http://localhost:3000/api/experiences"
+            let url = "http://localhost:3000/api/experiences"
+            const params = []
+            if (categorie) params.push("categorie=" + categorie)
+            if (search.trim()) params.push("search=" + encodeURIComponent(search.trim()))
+            if (params.length > 0) url += "?" + params.join("&")
             const res = await axios.get(url)
             setExperiences(res.data)
         } catch (err) {
@@ -28,11 +31,27 @@ function Home() {
         }
     }
 
+    const handleSearch = (e) => {
+        e.preventDefault()
+        setLoading(true)
+        fetchExperiences()
+    }
+
     return (
         <div className="home-container">
             <div className="home-hero">
                 <h1 className="home-titre">Découvrez des expériences uniques</h1>
                 <p className="home-sub">Activités, ateliers et aventures près de chez vous</p>
+                <form className="home-recherche" onSubmit={handleSearch}>
+                    <input
+                        type="text"
+                        className="home-recherche-input"
+                        placeholder="Rechercher une activité, un lieu..."
+                        value={search}
+                        onChange={(e) => setSearch(e.target.value)}
+                    />
+                    <button type="submit" className="home-recherche-btn">Rechercher</button>
+                </form>
             </div>
 
             <div className="home-filtres">

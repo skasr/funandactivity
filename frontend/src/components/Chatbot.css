@@ -1,50 +1,70 @@
 .chatbot-wrapper {
     position: fixed;
-    bottom: 24px;
-    right: 24px;
+    bottom: 28px;
+    right: 28px;
     z-index: 999;
 }
 
 .chatbot-bulle {
-    width: 56px;
-    height: 56px;
+    width: 58px;
+    height: 58px;
     border-radius: 50%;
-    background-color: #ff385c;
+    background-color: var(--rouge);
     color: white;
     border: none;
     font-size: 24px;
     cursor: pointer;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    box-shadow: 0 4px 16px rgba(255, 56, 92, 0.4);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.chatbot-bulle:hover {
+    transform: scale(1.08);
+    box-shadow: 0 6px 20px rgba(255, 56, 92, 0.5);
+    opacity: 1;
 }
 
 .chatbot-box {
     position: absolute;
-    bottom: 70px;
+    bottom: 74px;
     right: 0;
-    width: 320px;
-    background-color: white;
+    width: 340px;
+    background-color: var(--blanc);
     border-radius: 16px;
-    box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+    box-shadow: var(--ombre-forte);
     overflow: hidden;
+    border: 1px solid var(--bordure);
 }
 
 .chatbot-header {
-    background-color: #ff385c;
+    background-color: var(--rouge);
     color: white;
-    padding: 14px 16px;
+    padding: 14px 18px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    font-weight: bold;
+    font-weight: 600;
     font-size: 14px;
 }
 
 .chatbot-close {
-    background: none;
+    background: rgba(255,255,255,0.2);
     border: none;
     color: white;
     cursor: pointer;
-    font-size: 16px;
+    font-size: 14px;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.15s;
+}
+
+.chatbot-close:hover {
+    background: rgba(255,255,255,0.35);
+    opacity: 1;
 }
 
 .chatbot-messages {
@@ -58,21 +78,24 @@
 
 .msg-bot {
     background-color: #f1f1f1;
-    padding: 10px 12px;
-    border-radius: 12px 12px 12px 0;
+    padding: 10px 14px;
+    border-radius: 14px 14px 14px 4px;
     font-size: 13px;
     max-width: 85%;
     align-self: flex-start;
+    color: var(--texte);
+    line-height: 1.5;
 }
 
 .msg-user {
-    background-color: #ff385c;
+    background-color: var(--rouge);
     color: white;
-    padding: 10px 12px;
-    border-radius: 12px 12px 0 12px;
+    padding: 10px 14px;
+    border-radius: 14px 14px 4px 14px;
     font-size: 13px;
     max-width: 85%;
     align-self: flex-end;
+    line-height: 1.5;
 }
 
 .chatbot-options {
@@ -83,18 +106,21 @@
 }
 
 .chatbot-option {
-    padding: 6px 12px;
-    border: 1px solid #ff385c;
+    padding: 6px 14px;
+    border: 1.5px solid var(--rouge);
     border-radius: 20px;
     background-color: white;
-    color: #ff385c;
+    color: var(--rouge);
     cursor: pointer;
     font-size: 12px;
+    font-weight: 500;
+    transition: all 0.15s;
 }
 
 .chatbot-option:hover {
-    background-color: #ff385c;
+    background-color: var(--rouge);
     color: white;
+    opacity: 1;
 }
 
 .chatbot-resultats {
@@ -105,36 +131,45 @@
 }
 
 .chatbot-carte {
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    padding: 10px;
+    border: 1.5px solid var(--bordure);
+    border-radius: var(--rayon-petit);
+    padding: 10px 12px;
     cursor: pointer;
+    transition: border-color 0.15s;
 }
 
 .chatbot-carte:hover {
-    border-color: #ff385c;
+    border-color: var(--rouge);
 }
 
 .chatbot-carte-titre {
-    font-weight: bold;
+    font-weight: 600;
     font-size: 13px;
-    margin: 0 0 4px;
+    margin: 0 0 3px;
+    color: var(--texte);
 }
 
 .chatbot-carte-info {
     font-size: 12px;
-    color: #666;
+    color: var(--texte-gris);
     margin: 0;
 }
 
 .chatbot-recommencer {
     width: 100%;
     padding: 10px;
-    background-color: #ff385c;
+    background-color: var(--rouge);
     color: white;
     border: none;
-    border-radius: 8px;
+    border-radius: var(--rayon-petit);
     cursor: pointer;
     font-size: 13px;
+    font-weight: 600;
     margin-top: 4px;
+    transition: background-color 0.15s;
+}
+
+.chatbot-recommencer:hover {
+    background-color: var(--rouge-fonce);
+    opacity: 1;
 }

@@ -2,41 +2,60 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 14px 30px;
-    background-color: #ff385c;
+    padding: 0 40px;
+    height: 64px;
+    background-color: var(--blanc);
+    border-bottom: 1px solid var(--bordure);
+    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.06);
+    position: sticky;
+    top: 0;
+    z-index: 100;
 }
 
 .navbar-logo {
-    color: white;
-    text-decoration: none;
-    font-weight: bold;
-    font-size: 20px;
+    color: var(--rouge);
+    font-weight: 700;
+    font-size: 22px;
+    letter-spacing: -0.5px;
 }
 
 .navbar-links {
     display: flex;
     align-items: center;
-    gap: 16px;
-}
-
-.navbar-link {
-    color: white;
-    text-decoration: none;
-    font-size: 15px;
+    gap: 8px;
 }
 
 .navbar-welcome {
     font-size: 14px;
-    color: white;
-    opacity: 0.9;
+    color: var(--texte-gris);
+    padding: 0 8px;
+}
+
+.navbar-link {
+    color: var(--texte);
+    font-size: 14px;
+    font-weight: 500;
+    padding: 8px 14px;
+    border-radius: var(--rayon-petit);
+    transition: background-color 0.15s;
+}
+
+.navbar-link:hover {
+    background-color: var(--fond);
 }
 
 .navbar-btn {
-    background-color: white;
-    color: #ff385c;
+    background-color: var(--rouge);
+    color: white;
     border: none;
-    padding: 6px 14px;
-    border-radius: 6px;
+    padding: 8px 16px;
+    border-radius: var(--rayon-petit);
     cursor: pointer;
-    font-weight: bold;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.navbar-btn:hover {
+    background-color: var(--rouge-fonce);
+    opacity: 1;
 }
