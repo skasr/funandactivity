@@ -1,8 +1,18 @@
 import { useEffect, useState } from "react"
 import { useParams, useNavigate } from "react-router-dom"
 import { useAuth } from "../context/AuthContext"
+import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet"
+import L from "leaflet"
+import "leaflet/dist/leaflet.css"
 import axios from "axios"
 import "./Detail.css"
+
+delete L.Icon.Default.prototype._getIconUrl
+L.Icon.Default.mergeOptions({
+    iconRetinaUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png",
+    iconUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png",
+    shadowUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png",
+})
 
 function Detail() {
     const { id } = useParams()
@@ -21,6 +31,7 @@ function Detail() {
     const [commentaire, setCommentaire] = useState("")
     const [avisErreur, setAvisErreur] = useState("")
     const [avisMessage, setAvisMessage] = useState("")
+    const [contactLoading, setContactLoading] = useState(false)
 
     useEffect(() => {
         axios.get("http://localhost:3000/api/experiences/" + id)
@@ -57,6 +68,20 @@ function Detail() {
             fetchAvis()
         } catch (err) {
             setAvisErreur(err.response?.data?.message || "Erreur lors de l'envoi")
+        }
+    }
+
+    const handleContacter = async () => {
+        setContactLoading(true)
+        try {
+            const res = await axios.post(
+                "http://localhost:3000/api/conversations",
+                { experience_id: id, hote_id: experience.user_id },
+                { headers: { authorization: token } }
+            )
+            navigate("/messages/" + res.data.id)
+        } catch {
+            setContactLoading(false)
         }
     }
 
@@ -100,6 +125,7 @@ function Detail() {
                     <p className="detail-prix">{experience.prix} € <span>/ personne</span></p>
                     {user ? (
                         user.role === "visiteur" ? (
+                            <>
                             <form onSubmit={handleReservation}>
                                 <div className="detail-champ">
                                     <label>Date</label>
@@ -126,6 +152,14 @@ function Detail() {
                                 {erreur && <p className="detail-erreur">{erreur}</p>}
                                 <button type="submit" className="detail-btn">Réserver</button>
                             </form>
+                            <button
+                                className="detail-btn detail-btn-contacter"
+                                onClick={handleContacter}
+                                disabled={contactLoading}
+                            >
+                                {contactLoading ? "..." : "Contacter l'hôte"}
+                            </button>
+                            </>
                         ) : (
                             <p className="detail-hote-msg">Les hôtes ne peuvent pas réserver</p>
                         )
@@ -136,6 +170,26 @@ function Detail() {
                     )}
                 </div>
             </div>
+            {experience.latitude && experience.longitude && (
+                <div className="detail-map-section">
+                    <h2 className="detail-map-titre">Localisation</h2>
+                    <MapContainer
+                        center={[experience.latitude, experience.longitude]}
+                        zoom={13}
+                        className="detail-map"
+                        scrollWheelZoom={false}
+                    >
+                        <TileLayer
+                            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+                            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                        />
+                        <Marker position={[experience.latitude, experience.longitude]}>
+                            <Popup>{experience.titre}</Popup>
+                        </Marker>
+                    </MapContainer>
+                </div>
+            )}
+
             <div className="detail-avis">
                 <h2 className="detail-avis-titre">Avis</h2>
 

@@ -3,49 +3,63 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    min-height: calc(100vh - 64px);
+    min-height: calc(100vh - var(--navbar-h));
     text-align: center;
     padding: 40px 24px;
-    background: linear-gradient(135deg, #fff0f2 0%, #fff5f0 100%);
+    background:
+        radial-gradient(ellipse 70% 55% at 50% 50%, rgba(255,56,92,0.07), transparent 60%),
+        radial-gradient(circle at 1px 1px, rgba(0,0,0,0.04) 1px, transparent 0),
+        #fefefe;
+    background-size: auto, 28px 28px;
 }
 
 .notfound-code {
-    font-size: 110px;
-    font-weight: 800;
-    color: var(--rouge);
+    font-size: 160px;
+    font-weight: 900;
     margin: 0;
     line-height: 1;
-    letter-spacing: -4px;
-    opacity: 0.15;
+    letter-spacing: -8px;
+    background: var(--grad-hero);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    opacity: 0.12;
+    user-select: none;
+    animation: fadeIn 0.5s var(--ease-out);
 }
 
 .notfound-titre {
-    font-size: 30px;
-    font-weight: 700;
-    margin: -20px 0 12px;
+    font-size: 34px;
+    font-weight: 900;
+    margin: -32px 0 14px;
     color: var(--texte);
+    letter-spacing: -0.7px;
     position: relative;
+    animation: fadeUp 0.4s 0.10s var(--ease-out) both;
 }
 
 .notfound-sub {
     color: var(--texte-gris);
-    font-size: 16px;
-    margin-bottom: 36px;
+    font-size: 17px;
+    margin-bottom: 44px;
+    max-width: 380px;
+    line-height: 1.65;
+    animation: fadeUp 0.4s 0.16s var(--ease-out) both;
 }
 
 .notfound-btn {
-    padding: 13px 32px;
-    background-color: var(--rouge);
+    padding: 14px 40px;
+    background: var(--grad-btn);
     color: white;
-    border: none;
-    border-radius: var(--rayon-petit);
+    border-radius: var(--r-sm);
     font-size: 15px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background-color 0.15s;
+    font-weight: 700;
+    letter-spacing: 0.1px;
+    transition: background var(--t), box-shadow var(--t);
+    animation: fadeUp 0.4s 0.22s var(--ease-out) both;
 }
-
 .notfound-btn:hover {
-    background-color: var(--rouge-fonce);
+    background: var(--grad-btn-hover);
+    box-shadow: var(--sh-rouge);
     opacity: 1;
 }

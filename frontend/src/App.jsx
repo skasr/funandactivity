@@ -10,6 +10,8 @@ import Dashboard from "./pages/Dashboard"
 import NewExperience from "./pages/NewExperience"
 import EditExperience from "./pages/EditExperience"
 import NotFound from "./pages/NotFound"
+import Messagerie from "./pages/Messagerie"
+import Conversation from "./pages/Conversation"
 import Chatbot from "./components/Chatbot"
 
 function App() {
@@ -35,6 +37,16 @@ function App() {
                     <Route path="/modifier-experience/:id" element={
                         <ProtectedRoute>
                             <EditExperience />
+                        </ProtectedRoute>
+                    } />
+                    <Route path="/messages" element={
+                        <ProtectedRoute>
+                            <Messagerie />
+                        </ProtectedRoute>
+                    } />
+                    <Route path="/messages/:id" element={
+                        <ProtectedRoute>
+                            <Conversation />
                         </ProtectedRoute>
                     } />
                     <Route path="*" element={<NotFound />} />

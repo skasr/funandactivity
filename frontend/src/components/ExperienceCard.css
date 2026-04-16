@@ -1,83 +1,170 @@
 .card {
-    background-color: var(--blanc);
-    border: 1px solid var(--bordure);
-    border-radius: var(--rayon);
+    position: relative;
+    background: var(--blanc);
+    border-radius: var(--r-lg);
     overflow: hidden;
     cursor: pointer;
-    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--bordure);
+    transition:
+        transform     0.30s var(--ease-spring),
+        box-shadow    0.30s var(--ease),
+        border-color  var(--t);
+    animation: fadeUp 0.4s var(--ease-out) both;
+}
+
+/* Glow rouge au hover */
+.card::before {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    border-radius: var(--r-lg);
+    background: var(--grad-hero);
+    opacity: 0;
+    z-index: 0;
+    transition: opacity var(--t-md);
+    pointer-events: none;
+}
+.card::after {
+    content: '';
+    position: absolute;
+    inset: 1px;
+    border-radius: calc(var(--r-lg) - 1px);
+    background: var(--blanc);
+    z-index: 0;
+    pointer-events: none;
 }
 
 .card:hover {
-    transform: translateY(-4px);
-    box-shadow: var(--ombre-forte);
+    transform: translateY(-7px) scale(1.005);
+    box-shadow: var(--sh-xl), 0 0 0 1px transparent;
     border-color: transparent;
 }
+.card:hover::before { opacity: 1; }
 
+/* Tous les enfants au-dessus des pseudo-éléments */
+.card > * { position: relative; z-index: 1; }
+
+/* ── Image ── */
 .card-img-wrapper {
     position: relative;
     overflow: hidden;
-    height: 200px;
+    height: 220px;
+    background: var(--fond);
+    flex-shrink: 0;
 }
 
 .card-img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.3s ease;
+    object-position: center;
+    transition: transform 0.55s var(--ease);
     display: block;
+    image-rendering: -webkit-optimize-contrast;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+}
+.card:hover .card-img { transform: scale(1.08); }
+
+/* Gradient bas */
+.card-img-wrapper::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        to top,
+        rgba(10,10,10,0.38) 0%,
+        rgba(10,10,10,0.06) 45%,
+        transparent 70%
+    );
+    pointer-events: none;
+    z-index: 1;
 }
 
-.card:hover .card-img {
-    transform: scale(1.04);
-}
-
+/* Badge catégorie */
 .card-badge {
     position: absolute;
-    top: 12px;
-    left: 12px;
-    background-color: var(--blanc);
+    top: 14px;
+    left: 14px;
+    z-index: 2;
+    background: rgba(255,255,255,0.95);
     color: var(--rouge);
-    font-size: 11px;
-    font-weight: 700;
+    font-size: 10px;
+    font-weight: 800;
     padding: 4px 10px;
-    border-radius: 20px;
-    letter-spacing: 0.3px;
-    box-shadow: 0 1px 6px rgba(0,0,0,0.12);
+    border-radius: var(--r-pill);
+    letter-spacing: 0.6px;
+    text-transform: uppercase;
+    box-shadow: var(--sh-sm), inset 0 0 0 1px rgba(255,56,92,0.12);
+    backdrop-filter: blur(6px);
+    transition: transform var(--t);
 }
+.card:hover .card-badge { transform: scale(1.05); }
 
+/* ── Corps ── */
 .card-body {
-    padding: 14px 16px 16px;
+    padding: 16px 18px 18px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
 }
 
 .card-titre {
-    font-size: 15px;
-    font-weight: 600;
-    margin-bottom: 4px;
+    font-size: 14.5px;
+    font-weight: 700;
     color: var(--texte);
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    letter-spacing: -0.2px;
+    line-height: 1.35;
 }
 
 .card-lieu {
-    font-size: 13px;
+    font-size: 12.5px;
     color: var(--texte-gris);
-    margin-bottom: 12px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: flex;
+    align-items: center;
+    gap: 3px;
 }
 
+/* ── Footer ── */
 .card-footer {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-top: auto;
+    padding-top: 13px;
+    border-top: 1px solid var(--bordure);
 }
 
 .card-prix {
-    font-size: 15px;
-    font-weight: 700;
+    font-size: 15.5px;
+    font-weight: 800;
     color: var(--texte);
+    letter-spacing: -0.3px;
+    line-height: 1;
+}
+.card-prix span {
+    font-weight: 400;
+    font-size: 12px;
+    color: var(--texte-clair);
+    letter-spacing: 0;
+    margin-left: 1px;
 }
 
 .card-hote {
-    font-size: 12px;
+    font-size: 11.5px;
     color: var(--texte-clair);
+    max-width: 50%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-style: italic;
 }

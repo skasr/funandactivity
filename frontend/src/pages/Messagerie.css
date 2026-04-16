@@ -1,0 +1,130 @@
+.msg-container {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 48px var(--page-pad) 90px;
+    animation: fadeUp 0.35s var(--ease-out) both;
+}
+
+.msg-titre {
+    font-size: 30px;
+    font-weight: 900;
+    color: var(--texte);
+    letter-spacing: -0.6px;
+    margin-bottom: 32px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+.msg-titre::before {
+    content: '';
+    display: block;
+    width: 4px;
+    height: 28px;
+    background: var(--grad-btn);
+    border-radius: var(--r-pill);
+    flex-shrink: 0;
+}
+
+.msg-loading,
+.msg-vide {
+    text-align: center;
+    color: var(--texte-clair);
+    margin-top: 100px;
+    font-size: 16px;
+    font-style: italic;
+}
+
+.msg-liste { display:flex; flex-direction:column; gap:6px; }
+
+.msg-item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 17px 20px;
+    border-radius: var(--r-lg);
+    border: 1.5px solid var(--bordure);
+    background: var(--blanc);
+    cursor: pointer;
+    position: relative;
+    transition:
+        border-color var(--t),
+        box-shadow var(--t-md),
+        transform var(--t-md);
+    animation: fadeUp 0.35s var(--ease-out) both;
+}
+.msg-item:nth-child(1) { animation-delay:.00s }
+.msg-item:nth-child(2) { animation-delay:.05s }
+.msg-item:nth-child(n+3) { animation-delay:.10s }
+
+.msg-item:hover {
+    border-color: var(--bordure-forte);
+    box-shadow: var(--sh-md);
+    transform: translateX(4px);
+}
+
+.msg-item-nonlu {
+    border-left: 3px solid var(--rouge);
+    padding-left: 17px;
+}
+
+.msg-img {
+    width: 52px;
+    height: 52px;
+    border-radius: var(--r-sm);
+    object-fit: cover;
+    flex-shrink: 0;
+}
+
+.msg-infos { flex:1; min-width:0; }
+
+.msg-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2px;
+}
+.msg-nom {
+    font-weight: 700;
+    font-size: 14.5px;
+    color: var(--texte);
+    letter-spacing: -0.1px;
+}
+.msg-date {
+    font-size: 11px;
+    color: var(--texte-clair);
+    flex-shrink: 0;
+}
+.msg-experience {
+    display: block;
+    font-size: 11px;
+    color: var(--rouge);
+    font-weight: 700;
+    margin-bottom: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+}
+.msg-apercu {
+    font-size: 13.5px;
+    color: var(--texte-gris);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin: 0;
+}
+
+.msg-badge {
+    background: var(--grad-btn);
+    color: white;
+    border-radius: var(--r-pill);
+    min-width: 22px;
+    height: 22px;
+    font-size: 11px;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 6px;
+    flex-shrink: 0;
+    box-shadow: var(--sh-rouge-sm);
+    animation: scaleIn 0.2s var(--ease-spring);
+}

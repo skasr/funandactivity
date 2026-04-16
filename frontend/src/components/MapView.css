@@ -1,0 +1,93 @@
+.mapview-wrapper {
+    width: 100%;
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid var(--bordure);
+    margin-bottom: 32px;
+}
+
+.mapview-carte {
+    width: 100%;
+    height: 520px;
+}
+
+.mapview-vide {
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: var(--texte-gris);
+    gap: 8px;
+    background: var(--fond);
+}
+
+.mapview-vide-sub {
+    font-size: 13px;
+    opacity: 0.7;
+}
+
+/* Popup custom */
+.mapview-popup-contenu {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    min-width: 180px;
+    max-width: 220px;
+}
+
+.mapview-popup-img {
+    width: 100%;
+    height: 110px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.mapview-popup-infos {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.mapview-popup-categorie {
+    font-size: 11px;
+    color: var(--rouge);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.mapview-popup-titre {
+    font-size: 14px;
+    color: var(--texte);
+    line-height: 1.3;
+}
+
+.mapview-popup-lieu {
+    font-size: 12px;
+    color: var(--texte-gris);
+}
+
+.mapview-popup-prix {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--texte);
+}
+
+.mapview-popup-btn {
+    margin-top: 6px;
+    padding: 7px 12px;
+    background: var(--rouge);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    width: 100%;
+    transition: background 0.15s;
+}
+
+.mapview-popup-btn:hover {
+    background: var(--rouge-fonce);
+}
